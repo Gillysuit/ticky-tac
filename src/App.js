@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import {useEffect, useState} from 'react';
+import axios from 'axios';
 import './App.css';
 
 function App() {
+  const serverUrl = "http://localhost:8080/games/tictactoe";
+
+  const fetchBoard = () => {
+    axios.get(serverUrl)
+    .then((resp) =>{
+      console.log(resp.data);
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
+  useEffect(fetchBoard, []);
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     hello
     </div>
   );
 }
