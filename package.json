@@ -11,6 +11,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "nodemon": "^2.0.12",
+    "prettier": "^2.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -19,6 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "server": "nodemon server/server.js",
+    "format": "prettier --write \"**/*.{js,jsx}\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
