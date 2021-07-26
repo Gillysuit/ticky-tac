@@ -1,9 +1,18 @@
-const {winCheck} = require('./utils');
+const {winCheck, getAISymbol, nextAIMove} = require('./utils');
 
 module.exports = {
 
     ticTacToeAI(req, res, next){
-        res.locals.nextMove = req.body;
+
+        const AISymbol = getAISymbol(req.body.playerSymbol);
+        const board = req.body.board;
+
+        if(!winCheck(board)){
+            const alteredBoard = nextAIMove(board, AISymbol);
+            res.locals.nextMove = alteredBoard;
+            } else {
+                res.locals.nextMove = board;
+            }
 
         return next();
     },

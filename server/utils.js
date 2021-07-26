@@ -2,6 +2,12 @@ const matchThree = (space1, space2, space3) => {
     return space1 === space2 && space1 === space3 && space1 !== '';
 }
 
+const getAISymbol =(humanSymbol) => {
+    const symbols = ["X", "O"];
+
+    return symbols.filter((symbol) => symbol !== humanSymbol).join("");
+}
+
 // Returns 'tie', 'X', 'Y', or null
 const winCheck = (board) => {
     let winner = null;
@@ -46,4 +52,18 @@ const winCheck = (board) => {
     return winner;
 }
 
-module.exports = { winCheck : winCheck}
+const nextAIMove = (board, aiSymbol) => {
+
+    for(let i = 0; i < board.length; i ++){
+        for(let j = 0; j < board[i].length; j++ ){
+            console.log(board[i][j])
+            if(board[i][j] === ""){                        
+                board[i][j] = aiSymbol;
+                return board;
+            }
+        }
+    }
+   
+};
+
+module.exports = { winCheck : winCheck, getAISymbol: getAISymbol, nextAIMove: nextAIMove}

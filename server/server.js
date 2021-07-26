@@ -19,7 +19,9 @@ app.get('/games/tictactoe',  (req, res) => {
   });
 
 app.post('/games/tictactoe/ai', gameController.ticTacToeAI, gameController.checkWinState, (req, res) => {
-    res.status(200).send(res.locals);
+    const {nextMove, winner} = res.locals;
+
+    res.status(200).send({newBoard: nextMove, winner});
   });
 
   //error handling
