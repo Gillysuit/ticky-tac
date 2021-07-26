@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import axios from 'axios';
-import './App.css';
+import './game-styles.css';
 
 function App() {
   const serverUrl = "http://localhost:8080/games/tictactoe";
@@ -55,7 +55,6 @@ function App() {
 
   return (
     <div className="App">
-     hello
      {gameBoard}
     </div>
   );

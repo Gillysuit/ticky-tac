@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
+const gameController = require('./gameController')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -17,8 +18,8 @@ app.get('/games/tictactoe',  (req, res) => {
     res.json(gameBoard);  
   });
 
-app.post('/games/tictactoe/ai', (req, res) => {
-    res.status(200).send({});
+app.post('/games/tictactoe/ai', gameController.ticTacToeAI, gameController.checkWinState, (req, res) => {
+    res.status(200).send(res.locals);
   });
 
   //error handling
