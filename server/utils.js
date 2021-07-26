@@ -52,17 +52,86 @@ const winCheck = (board) => {
     return winner;
 }
 
+const outComes =  ["X", "O", 'tie'];
+
+const miniMax = (board, curDepth, isMaximizing, gameOptions) => {
+    const { aiSymbol, human, pointBoard} = gameOptions;
+    // recursive base case
+    const result = winCheck(board);
+   
+    if(result !== null){
+        return pointBoard[result];
+    }
+
+    if (isMaximizing) {
+        let bestScore = -Infinity;
+        for (let i = 0; i < 3; i++) {
+          for (let j = 0; j < 3; j++) {
+            if (board[i][j] === '') {
+              board[i][j] = aiSymbol;
+              let score = miniMax(board, curDepth + 1, false, gameOptions);
+              board[i][j] = '';
+              bestScore = Math.max(score, bestScore);
+            }
+          }
+        }
+        return bestScore;
+      } else {
+        // human playing;
+        let bestScore = Infinity;
+        for (let i = 0; i < 3; i++) {
+          for (let j = 0; j < 3; j++) {
+            if (board[i][j] === '') {
+              board[i][j] = human;
+              let score = miniMax(board, curDepth + 1, true, gameOptions);
+              board[i][j] = '';
+              bestScore = Math.min(score, bestScore);
+            }
+          }
+        }
+        return bestScore;
+      }
+}
+
 const nextAIMove = (board, aiSymbol) => {
 
+    let human;
+
+    const pointBoard =  outComes.reduce((obj, outCome) => {
+        if(aiSymbol === outCome){
+            return {...obj, [outCome]: 1};
+        } else if(outCome === 'tie') {
+            return {...obj, [outCome]: 0 }
+        } else {
+            human = outCome;
+            return {...obj, [outCome]: -1}
+        }
+    }, {})
+
+    let bestScore = -Infinity;
+    let move;
+
+    const gameOptions = {aiSymbol, human, pointBoard}
+    
     for(let i = 0; i < board.length; i ++){
         for(let j = 0; j < board[i].length; j++ ){
             console.log(board[i][j])
             if(board[i][j] === ""){                        
                 board[i][j] = aiSymbol;
-                return board;
+                
+                let score = miniMax(board, 0, false, gameOptions)
+                board[i][j] = '';
+                if(score > bestScore) {
+                    bestScore =  score;
+                    move = {row: i, place: j};
+                }
             }
         }
     }
+
+    board[move.row][move.place] = aiSymbol;
+    
+    return board;
    
 };
 

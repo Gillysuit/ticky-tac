@@ -100,10 +100,38 @@ function App() {
     )
   }
 
+  const resetGame = () => {
+    fetchBoard();
+    setWinner(null);
+    setPlayerSymbol('');
+  }
+
+  const WinnerBanner = () => {
+    if(winner !== null){
+      let winText;
+      if(winner === 'tie'){
+        winText = "It's a Tie!"
+      } else {
+        winText = `${winner} wins!`
+      }
+      return(
+        <div>
+          <h2 class="winText">{winText}</h2>
+          <buttton className="reset" onClick={resetGame}>New Game</buttton>
+        </div>
+      )
+    }
+    return null;
+  }
+
   return (
     <div className="App">
-      {!playerSymbol && <ChooseSymbol />}
-     {playerSymbol && gameBoard}
+      <div className="gameView">
+      <h1 className="title" >Tic-Tac-Toe</h1>
+         {!playerSymbol && <ChooseSymbol />}
+         {playerSymbol && gameBoard }
+         {winner && <WinnerBanner />}
+      </div>
     </div>
   );
 }

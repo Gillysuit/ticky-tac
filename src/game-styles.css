@@ -8,15 +8,31 @@
     flex-direction: column;
 }
 
-.gridWrapper {
+.title{
+    font-size: 4rem;
+  
+}
+
+.winText{
+    font-size: 3rem;
+}
+
+.gameView{
     display: flex;
-     width: 30rem;
-     height: 30rem;
-   
-     border: 3px palevioletred solid;
-     padding: 0;
-     margin: 0;
- }
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.gridWrapper {
+   display: flex;
+    width: 30rem;
+    height: 30rem;
+  
+    border: 3px palevioletred solid;
+    padding: 0;
+    margin: 0;
+}
 
 .rowWrapper {
     display: flex;
@@ -37,10 +53,27 @@
     font-size: 8rem;
 }
 
+.choices{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .X{
     color: gold;
 }
 
 .O{
     color: orangered;
+}
+
+.reset {
+    font-weight: 600;
+    font-size: 1.5rem;
+    padding: 1rem;
+    margin-top: 2rem;
+    color: white;
+    background-color: crimson;
+    border: 3px palevioletred solid;
+    border-radius: 7px;
 }
